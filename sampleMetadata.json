@@ -13,7 +13,7 @@
     "properties": {
       "humidity": {
         "type": "number",
-        "frequency": "60",
+        "frequency": "3600",
         "unit": "percent",
         "error": ".01",
         "description": "A humidity sensor",
@@ -22,7 +22,7 @@
       "temperature": {
         "type": "number",
         "unit": "celsius",
-        "frequency": "1",
+        "frequency": "60",
         "error": ".1",
         "description": "An ambient temperature sensor",
         "href": "/things/pi/properties/temperature"

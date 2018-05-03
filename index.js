@@ -9,7 +9,7 @@ import os from 'os';
 import auction from "./build/contracts/dataAuction.json";
 import auctionFactory from "./build/contracts/AuctionFactory.json"
 import sampleMetadata from "./sampleMetadata.json";
-
+import tempData from './temperature.json';
 
 const app = express();
 const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
@@ -29,7 +29,7 @@ const createAuction = async (req,res,next) => {
   let metadataJSON = sampleMetadata[0];
   metadataJSON.location = getLocation();
   let metadata = JSON.stringify(metadataJSON);
-  
+
   const unlocked = await web3.personal.unlockAccount(beneficiary, '8580894a8e77c96c0132be3d766d87e3723111360e6b89dbd6408190b272b248', 10);
   console.log("unlocked " + unlocked);
 
@@ -82,10 +82,8 @@ app.get('/getAuctions', getAuctions, (req, res) => {
   }
 });
 
-app.get('/things/pi/properties/humidity', (req, res) => {
-  const data = {
-
-  }
+app.get('/things/pi/properties/temperature', (req, res) => {
+  res.send(tempData)
 })
 
 
