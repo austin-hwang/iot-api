@@ -22,7 +22,7 @@
       "temperature": {
         "type": "number",
         "unit": "celsius",
-        "frequency": "60",
+        "frequency": "3600",
         "error": ".1",
         "description": "An ambient temperature sensor",
         "href": "/things/pi/properties/temperature"

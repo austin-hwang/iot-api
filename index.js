@@ -10,6 +10,7 @@ import auction from "./build/contracts/dataAuction.json";
 import auctionFactory from "./build/contracts/AuctionFactory.json"
 import sampleMetadata from "./sampleMetadata.json";
 import tempData from './temperature.json';
+import humidityData from './humidity.json';
 
 const app = express();
 const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
@@ -84,6 +85,10 @@ app.get('/getAuctions', getAuctions, (req, res) => {
 
 app.get('/things/pi/properties/temperature', (req, res) => {
   res.send(tempData)
+})
+
+app.get('/things/pi/properties/humidity', (req, res) => {
+  res.send(humidityData)
 })
 
 
