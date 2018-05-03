@@ -9,6 +9,7 @@
     "name": "WoT Pi",
     "type": "thing",
     "description": "A Household WoT-connected Raspberry Pi",
+    "location": null,
     "properties": {
       "humidity": {
         "type": "number",
@@ -38,6 +39,7 @@
     "name": "Echo Dot",
     "type": "thing",
     "description": "An Amazon Echo Dot",
+    "location": null,
     "properties": {
       "voiceSearches": {
         "type": "string",
@@ -57,6 +59,7 @@
     "name": "Samsung RF22N9781SG/AA",
     "type": "thing",
     "description": "A household Samsung Family Hub fridge",
+    "location": null,
     "properties": {
       "fridgeContents": {
         "type": "picture",
@@ -76,6 +79,7 @@
     "name": "Fitbit Versa",
     "type": "thing",
     "description": "A smartwatch with a heartrate sensor",
+    "location": null,
     "properties": {
       "heartRate": {
         "type": "number",
@@ -97,6 +101,7 @@
     "name": "SEN-13322",
     "type": "thing",
     "description": "A soil moisture sensor at a corn farm",
+    "location": null,
     "properties": {
       "moisture": {
         "type": "number",

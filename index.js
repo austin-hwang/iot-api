@@ -2,10 +2,14 @@ import express from 'express';
 import { default as Web3 } from 'web3';
 import { default as contract } from "truffle-contract";
 import sha256 from 'js-sha256';
+import hat from 'hat';
+import geoip from 'geoip-lite';
+import os from 'os';
 
 import auction from "./build/contracts/dataAuction.json";
 import auctionFactory from "./build/contracts/AuctionFactory.json"
 import sampleMetadata from "./sampleMetadata.json";
+
 
 const app = express();
 const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
@@ -14,15 +18,18 @@ const Auction = contract(auction);
 Auction.setProvider(web3.currentProvider);
 const AuctionFactory = contract(auctionFactory);
 AuctionFactory.setProvider(web3.currentProvider);
+const apiKey = hat()
 
 const createAuction = async (req,res,next) => {
   let beneficiary = '0x0Ea55fd4140012e999a0c397DCcf2d2FD46bf112';
-  let metadata = JSON.stringify(sampleMetadata[0]);
   let sellerHash = '0x' + sha256('12345678910');
   let collectionPeriod = 600;
   let biddingTime = 600;
-  let apiKey = 'alexisamoistcunt';
 
+  let metadataJSON = sampleMetadata[0];
+  metadataJSON.location = getLocation();
+  let metadata = JSON.stringify(metadataJSON);
+  
   const unlocked = await web3.personal.unlockAccount(beneficiary, '8580894a8e77c96c0132be3d766d87e3723111360e6b89dbd6408190b272b248', 10);
   console.log("unlocked " + unlocked);
 
@@ -38,6 +45,24 @@ const getAuctions = async (req,res,next) => {
   req.data = auction;
   next();
 };
+
+const getLocation = () => {
+  let ifaces = os.networkInterfaces();
+  let location = null;
+
+  Object.keys(ifaces).forEach(function (ifname) {
+    ifaces[ifname].forEach(function (iface) {
+      if ('IPv4' !== iface.family || iface.internal !== false) {
+        // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+        return;
+      }
+      let ip = iface.address;
+      location = geoip.lookup(ip) || geoip.lookup('207.97.227.239');
+    });
+  });
+
+  return location;
+}
 
 app.get('/createAuction', createAuction, (req, res) => {
 	try {
@@ -56,6 +81,13 @@ app.get('/getAuctions', getAuctions, (req, res) => {
     res.send(401);
   }
 });
+
+app.get('/things/pi/properties/humidity', (req, res) => {
+  const data = {
+
+  }
+})
+
 
 app.listen(5000, () => {
 	console.log('IoT device listening on port 5000!')
