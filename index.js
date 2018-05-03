@@ -22,7 +22,7 @@ AuctionFactory.setProvider(web3.currentProvider);
 const apiKey = hat()
 
 const createAuction = async () => {
-  let beneficiary = '0x0Ea55fd4140012e999a0c397DCcf2d2FD46bf112';
+  let beneficiary = web3.eth.accounts[0];
   let sellerHash = '0x' + sha256('12345678910');
   let collectionPeriod = 600;
   let biddingTime = 600;
