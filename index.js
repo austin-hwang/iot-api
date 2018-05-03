@@ -32,7 +32,7 @@ const createAuction = async (req,res,next) => {
   let metadata = JSON.stringify(metadataJSON);
 
   const unlocked = await web3.personal.unlockAccount(beneficiary, '8580894a8e77c96c0132be3d766d87e3723111360e6b89dbd6408190b272b248', 10);
-  console.log("unlocked " + unlocked);
+  console.log("API_KEY: " + apiKey);
 
   let factoryInstance = await AuctionFactory.deployed();
   let auction = await factoryInstance.createAuction(biddingTime, beneficiary, collectionPeriod, sellerHash, metadata, apiKey, { gas: 1500000, from: beneficiary });
@@ -75,19 +75,19 @@ app.get('/createAuction', createAuction, (req, res) => {
 });
 
 app.get('/getAuctions', getAuctions, (req, res) => {
-  try {
-    const result = req.data;
-    res.send(result);
-  } catch(err) {
-    res.send(401);
-  }
+  const result = req.data;
+  res.send(result);
 });
 
 app.get('/things/pi/properties/temperature', (req, res) => {
+  if (req.get('x-access-token') !== apiKey)
+    return res.sendStatus(401);
   res.send(tempData)
 })
 
 app.get('/things/pi/properties/humidity', (req, res) => {
+  if (req.get('x-access-token') !== apiKey)
+    return res.sendStatus(401);
   res.send(humidityData)
 })
 
