@@ -3,7 +3,7 @@
     "links": [
       { "rel": "properties", "href": "/things/pi/properties" },
       { "rel": "events", "href": "/things/pi/events" },
-      { "rel": "alternate", "href": "wss://mywebthingserver.com/things/pi" },
+      { "rel": "alternate", "href": "http://localhost:5000/things/pi" },
       { "href": "/things/pi", "rel": "alternate", "mediaType": "text/html" }
     ],
     "name": "WoT Pi",
@@ -33,7 +33,7 @@
     "links": [
       { "rel": "properties", "href": "/things/pi/properties" },
       { "rel": "events", "href": "/things/pi/events" },
-      { "rel": "alternate", "href": "wss://mywebthingserver.com/things/pi" },
+      { "rel": "alternate", "href": "http://localhost:5000/things/pi" },
       { "href": "/things/pi", "rel": "alternate", "mediaType": "text/html" }
     ],
     "name": "Echo Dot",
@@ -53,7 +53,7 @@
     "links": [
       { "rel": "properties", "href": "/things/pi/properties" },
       { "rel": "events", "href": "/things/pi/events" },
-      { "rel": "alternate", "href": "wss://mywebthingserver.com/things/pi" },
+      { "rel": "alternate", "href": "http://localhost:5000/things/pi" },
       { "href": "/things/pi", "rel": "alternate", "mediaType": "text/html" }
     ],
     "name": "Samsung RF22N9781SG/AA",
@@ -73,7 +73,7 @@
     "links": [
       { "rel": "properties", "href": "/things/pi/properties" },
       { "rel": "events", "href": "/things/pi/events" },
-      { "rel": "alternate", "href": "wss://mywebthingserver.com/things/pi" },
+      { "rel": "alternate", "href": "http://localhost:5000/things/pi" },
       { "href": "/things/pi", "rel": "alternate", "mediaType": "text/html" }
     ],
     "name": "Fitbit Versa",
@@ -95,7 +95,7 @@
     "links": [
       { "rel": "properties", "href": "/things/pi/properties" },
       { "rel": "events", "href": "/things/pi/events" },
-      { "rel": "alternate", "href": "wss://mywebthingserver.com/things/pi" },
+      { "rel": "alternate", "href": "http://localhost:5000/things/pi" },
       { "href": "/things/pi", "rel": "alternate", "mediaType": "text/html" }
     ],
     "name": "SEN-13322",

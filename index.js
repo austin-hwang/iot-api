@@ -83,7 +83,7 @@ const withdrawFunds = async () => {
       }
     }
   }
-}
+};
 
 const endAuction = async () => {
   const timeout = 650; // in seconds
@@ -98,7 +98,7 @@ const endAuction = async () => {
       }
     }
   }
-}
+};
 
 app.get('/getAuctions', getAuctions, (req, res) => {
   const result = req.data;
