@@ -28,7 +28,7 @@ let auctionAddress = null;
 
 const createAuction = async () => {
   let sellerHash = "0x" + sha256(sampleTempData.slice(0, 128));
-  console.log(sellerHash);
+  console.log("Data Hash:" + sellerHash);
   let collectionPeriod = 600;
   let biddingTime = 60;
 
@@ -94,7 +94,7 @@ const withdrawFunds = async () => {
       try {
         await auction.withdrawReward({ from: beneficiary, gas: 1500000 });
         clearInterval(intervalId);
-        console.log("Funds transferred.")
+        console.log("Funds transferred.");
       } catch (error) {
         console.log("Funds not yet available.");
       }

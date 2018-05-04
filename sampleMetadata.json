@@ -19,14 +19,6 @@
         "error": ".01",
         "description": "A humidity sensor",
         "href": "/things/pi/properties/humidity"
-      },
-      "temperature": {
-        "type": "number",
-        "unit": "celsius",
-        "frequency": "3600",
-        "error": ".1",
-        "description": "An ambient temperature sensor",
-        "href": "/things/pi/properties/temperature"
       }
     }
   },
@@ -38,16 +30,18 @@
       { "rel": "root", "href": "http://localhost:5000" },
       { "href": "/things/pi", "rel": "alternate", "mediaType": "text/html" }
     ],
-    "name": "Echo Dot",
+    "name": "Nest Thermostat",
     "type": "thing",
-    "description": "An Amazon Echo Dot",
+    "description": "A Google Nest thermostat",
     "location": null,
     "properties": {
-      "voiceSearches": {
-        "type": "string",
-        "frequency": "86400",
-        "description": "The user's daily voice searches",
-        "href": "/things/pi/properties/voiceSearches"
+      "temperature": {
+        "type": "number",
+        "unit": "celsius",
+        "frequency": "3600",
+        "error": ".1",
+        "description": "An ambient temperature sensor",
+        "href": "/things/pi/properties/temperature"
       }
     }
   },
