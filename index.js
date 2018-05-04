@@ -12,6 +12,9 @@ import sampleMetadata from "./sampleMetadata.json";
 import tempData from "./temperature.json";
 import humidityData from "./humidity.json";
 
+const sampleTempData = JSON.stringify(tempData);
+const sampleHumidityData = JSON.stringify(humidityData);
+
 const app = express();
 const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
@@ -24,9 +27,10 @@ const beneficiary = web3.eth.accounts[0];
 let auctionAddress = null;
 
 const createAuction = async () => {
-  let sellerHash = "0x" + sha256(JSON.stringify(tempData).slice(0, 128));
+  let sellerHash = "0x" + sha256(sampleTempData.slice(0, 128));
+  console.log(sellerHash);
   let collectionPeriod = 600;
-  let biddingTime = 600;
+  let biddingTime = 60;
 
   let metadataJSON = sampleMetadata[parseInt(process.env.PORT)];
   metadataJSON.location = getLocation();
@@ -39,7 +43,9 @@ const createAuction = async () => {
   );
   console.log("API_KEY: " + apiKey);
 
-  let factoryInstance = await AuctionFactory.deployed();
+  let factoryInstance = await AuctionFactory.at(
+    "0x0257606217e4412b7f66a69a30472690d5edbd11"
+  );
   let auction = await factoryInstance.createAuction(
     biddingTime,
     beneficiary,
@@ -49,7 +55,7 @@ const createAuction = async () => {
     apiKey,
     { gas: 1500000, from: beneficiary }
   );
-  auctionAddress = auction.logs[0].address;
+  auctionAddress = auction.logs[0].args.auction;
   return auction;
 };
 
@@ -127,13 +133,13 @@ app.get("/getAuctions", getAuctions, (req, res) => {
 });
 
 app.get("/things/pi/properties/temperature", (req, res) => {
-  if (req.get("x-access-token") !== apiKey) return res.sendStatus(401);
-  res.send(tempData);
+  if (req.get("x-access-token") != apiKey) return res.sendStatus(401);
+  res.send(sampleTempData);
 });
 
 app.get("/things/pi/properties/humidity", (req, res) => {
-  if (req.get("x-access-token") !== apiKey) return res.sendStatus(401);
-  res.send(humidityData);
+  if (req.get("x-access-token") != apiKey) return res.sendStatus(401);
+  res.send(sampleHumidityData);
 });
 
 app.listen(5000 + parseInt(process.env.PORT), async () => {
