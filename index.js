@@ -19,10 +19,11 @@ const Auction = contract(auction);
 Auction.setProvider(web3.currentProvider);
 const AuctionFactory = contract(auctionFactory);
 AuctionFactory.setProvider(web3.currentProvider);
-const apiKey = hat()
+const apiKey = hat();
+const beneficiary = web3.eth.accounts[0];
+let auctionAddress = null;
 
 const createAuction = async () => {
-  let beneficiary = web3.eth.accounts[0];
   let sellerHash = '0x' + sha256(JSON.stringify(tempData).slice(0, 128));
   let collectionPeriod = 600;
   let biddingTime = 600;
@@ -36,6 +37,7 @@ const createAuction = async () => {
 
   let factoryInstance = await AuctionFactory.deployed();
   let auction = await factoryInstance.createAuction(biddingTime, beneficiary, collectionPeriod, sellerHash, metadata, apiKey, { gas: 1500000, from: beneficiary });
+  auctionAddress = auction.logs[0].address;
   return auction;
 };
 
@@ -65,6 +67,22 @@ const getLocation = () => {
   });
 
   return location;
+};
+
+const withdrawFunds = async () => {
+  const interval = 300; // in minutes
+  const intervalId = setInterval(attemptWithdraw, 1000 * interval);
+  async function attemptWithdraw() {
+    if (auctionAddress) {
+      let auction = await Auction.at(auctionAddress);
+      try {
+        await auction.withdrawReward({from: beneficiary});
+        clearInterval(intervalId);
+      } catch (error) {
+        console.log('Not ready yet')
+      }
+    }
+  }
 }
 
 app.get('/getAuctions', getAuctions, (req, res) => {
@@ -87,6 +105,7 @@ app.get('/things/pi/properties/humidity', (req, res) => {
 
 app.listen(5000, async () => {
     await createAuction();
+    withdrawFunds();
     console.log('IoT device listening on port 5000!')
   });
 
