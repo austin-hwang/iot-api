@@ -27,7 +27,13 @@ const beneficiary = web3.eth.accounts[0];
 let auctionAddress = null;
 
 const createAuction = async () => {
-  let sellerHash = "0x" + sha256(sampleTempData.slice(0, 128));
+  let sellerHash =
+    "0x" +
+    sha256(
+      parseInt(process.env.PORT)
+        ? sampleTempData.slice(0, 128)
+        : sampleHumidityData.slice(0, 128)
+    );
   console.log("Data Hash:" + sellerHash);
   let collectionPeriod = 600;
   let biddingTime = 60;
