@@ -44,7 +44,7 @@ const createAuction = async () => {
   console.log("API_KEY: " + apiKey);
 
   let factoryInstance = await AuctionFactory.at(
-    "0x0257606217e4412b7f66a69a30472690d5edbd11"
+    "0xc4a324b35f1121ba66ab5f7b366d983f252c1fd7"
   );
   let auction = await factoryInstance.createAuction(
     biddingTime,
