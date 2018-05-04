@@ -28,7 +28,7 @@ const createAuction = async () => {
   let collectionPeriod = 600;
   let biddingTime = 600;
 
-  let metadataJSON = sampleMetadata[process.env.PORT];
+  let metadataJSON = sampleMetadata[parseInt(process.env.PORT)];
   metadataJSON.location = getLocation();
   let metadata = JSON.stringify(metadataJSON);
 
@@ -114,7 +114,10 @@ const endAuction = async () => {
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, x-access-token"
+  );
   next();
 });
 
@@ -133,11 +136,13 @@ app.get("/things/pi/properties/humidity", (req, res) => {
   res.send(humidityData);
 });
 
-app.listen(5000 + process.env.PORT, async () => {
+app.listen(5000 + parseInt(process.env.PORT), async () => {
   await createAuction();
   withdrawFunds();
   endAuction();
-  console.log(`IoT device listening on port ${5000 + process.env.PORT}!`);
+  console.log(
+    `IoT device listening on port ${5000 + parseInt(process.env.PORT)}!`
+  );
 });
 
 /*

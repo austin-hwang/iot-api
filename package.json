@@ -4,8 +4,11 @@
   "description": "Backend for datachain BoT",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "truffle migrate --reset --compile-all && babel-node index.js --presets es2015"
+    "test": "babel-node index.js",
+    "testAll":
+      "(export PORT=0 && npm run test) & (export PORT=1 && npm run test) & (export PORT=2 && npm run test) & (export PORT=3 && npm run test) & (export PORT=4 && npm run test) && fg",
+    "start":
+      "truffle migrate --reset --compile-all && PORT=0 babel-node index.js"
   },
   "author": "",
   "license": "ISC",
