@@ -23,7 +23,7 @@ const apiKey = hat()
 
 const createAuction = async () => {
   let beneficiary = web3.eth.accounts[0];
-  let sellerHash = '0x' + sha256('12345678910');
+  let sellerHash = '0x' + sha256(JSON.stringify(tempData).slice(0, 16))
   let collectionPeriod = 600;
   let biddingTime = 600;
 
@@ -31,7 +31,7 @@ const createAuction = async () => {
   metadataJSON.location = getLocation();
   let metadata = JSON.stringify(metadataJSON);
 
-  const unlocked = await web3.personal.unlockAccount(beneficiary, '8580894a8e77c96c0132be3d766d87e3723111360e6b89dbd6408190b272b248', 10);
+  const unlocked = await web3.personal.unlockAccount(beneficiary, 'welcome123', 10);
   console.log("API_KEY: " + apiKey);
 
   let factoryInstance = await AuctionFactory.deployed();
