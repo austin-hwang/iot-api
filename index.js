@@ -58,6 +58,9 @@ const getLocation = () => {
       }
       let ip = iface.address;
       location = geoip.lookup(ip) || geoip.lookup('207.97.227.239');
+      location.zip = location.zip.toString().padStart(5,"0");
+      delete location['range'];
+      delete location['metro'];
     });
   });
 
