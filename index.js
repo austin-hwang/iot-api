@@ -70,16 +70,31 @@ const getLocation = () => {
 };
 
 const withdrawFunds = async () => {
-  const interval = 300; // in minutes
+  const interval = 600; // in seconds
   const intervalId = setInterval(attemptWithdraw, 1000 * interval);
   async function attemptWithdraw() {
     if (auctionAddress) {
       let auction = await Auction.at(auctionAddress);
       try {
-        await auction.withdrawReward({from: beneficiary});
+        await auction.withdrawReward({ from: beneficiary });
         clearInterval(intervalId);
       } catch (error) {
         console.log('Not ready yet')
+      }
+    }
+  }
+}
+
+const endAuction = async () => {
+  const timeout = 650; // in seconds
+  setTimeout(attemptEnd, 1000 * timeout);
+  async function attemptEnd() {
+    if (auctionAddress) {
+      let auction = await Auction.at(auctionAddress);
+      try {
+        await auction.endAuction({ from: beneficiary });
+      } catch (error) {
+        console.log('Could not end auction');
       }
     }
   }
@@ -106,6 +121,7 @@ app.get('/things/pi/properties/humidity', (req, res) => {
 app.listen(5000, async () => {
     await createAuction();
     withdrawFunds();
+    endAuction();
     console.log('IoT device listening on port 5000!')
   });
 
