@@ -43,9 +43,7 @@ const createAuction = async () => {
   );
   console.log("API_KEY: " + apiKey);
 
-  let factoryInstance = await AuctionFactory.at(
-    "0x0257606217e4412b7f66a69a30472690d5edbd11"
-  );
+  let factoryInstance = await AuctionFactory.deployed();
   let auction = await factoryInstance.createAuction(
     biddingTime,
     beneficiary,
@@ -88,31 +86,17 @@ const getLocation = () => {
 };
 
 const withdrawFunds = async () => {
-  const interval = 600; // in seconds
+  const interval = 30; // in seconds
   const intervalId = setInterval(attemptWithdraw, 1000 * interval);
   async function attemptWithdraw() {
     if (auctionAddress) {
       let auction = await Auction.at(auctionAddress);
       try {
-        await auction.withdrawReward({ from: beneficiary });
+        await auction.withdrawReward({ from: beneficiary, gas: 1500000 });
         clearInterval(intervalId);
+        console.log("Funds transferred.")
       } catch (error) {
-        console.log("Not ready yet");
-      }
-    }
-  }
-};
-
-const endAuction = async () => {
-  const timeout = 650; // in seconds
-  setTimeout(attemptEnd, 1000 * timeout);
-  async function attemptEnd() {
-    if (auctionAddress) {
-      let auction = await Auction.at(auctionAddress);
-      try {
-        await auction.endAuction({ from: beneficiary });
-      } catch (error) {
-        console.log("Could not end auction");
+        console.log("Funds not yet available.");
       }
     }
   }
@@ -133,19 +117,18 @@ app.get("/getAuctions", getAuctions, (req, res) => {
 });
 
 app.get("/things/pi/properties/temperature", (req, res) => {
-  if (req.get("x-access-token") != apiKey) return res.sendStatus(401);
+  if (req.get("x-access-token") !== apiKey) return res.sendStatus(401);
   res.send(sampleTempData);
 });
 
 app.get("/things/pi/properties/humidity", (req, res) => {
-  if (req.get("x-access-token") != apiKey) return res.sendStatus(401);
+  if (req.get("x-access-token") !== apiKey) return res.sendStatus(401);
   res.send(sampleHumidityData);
 });
 
 app.listen(5000 + parseInt(process.env.PORT), async () => {
   await createAuction();
   withdrawFunds();
-  endAuction();
   console.log(
     `IoT device listening on port ${5000 + parseInt(process.env.PORT)}!`
   );
