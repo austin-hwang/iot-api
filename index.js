@@ -23,7 +23,7 @@ const apiKey = hat()
 
 const createAuction = async () => {
   let beneficiary = web3.eth.accounts[0];
-  let sellerHash = '0x' + sha256(JSON.stringify(tempData).slice(0, 16))
+  let sellerHash = '0x' + sha256(JSON.stringify(tempData).slice(0, 128));
   let collectionPeriod = 600;
   let biddingTime = 600;
 
