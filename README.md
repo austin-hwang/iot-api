@@ -15,7 +15,7 @@ To install dependencies: `npm i`
 Either install the Ganache GUI and change port number to `8545` or run in terminal `ganache-cli -b 3`
 
 To start IoT API backend: `npm start`, which creates an instance of the AuctionFactory, which we use to keep track of
- all created auctions, and starts one Auction. After that, running `npm run testall` would create 5 more auctions using
+ all created auctions, and starts one Auction. After that, running `npm run testAll` would create 5 more auctions using
  the same AuctionFactory.
 
 
