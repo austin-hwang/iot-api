@@ -36,7 +36,7 @@ const createAuction = async () => {
     );
   console.log("Data Hash:" + sellerHash);
   let collectionPeriod = 600;
-  let biddingTime = 60;
+  let biddingTime = 100;
 
   let metadataJSON = sampleMetadata[parseInt(process.env.PORT)];
   metadataJSON.location = getLocation();
@@ -81,7 +81,10 @@ const getLocation = () => {
         return;
       }
       let ip = iface.address;
-      location = geoip.lookup(ip) || geoip.lookup("207.97.227.239");
+      location =
+        geoip.lookup(ip) || process.env.PORT < 2
+          ? geoip.lookup("207.97.227.239")
+          : geoip.lookup("65.112.8.132");
       location.zip = location.zip.toString().padStart(5, "0");
       delete location["range"];
       delete location["metro"];
