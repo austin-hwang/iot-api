@@ -100,9 +100,11 @@ const withdrawFunds = async () => {
       try {
         await auction.withdrawReward({ from: beneficiary, gas: 1500000 });
         clearInterval(intervalId);
-        console.log("Funds transferred.");
+        console.log(
+          `${await auction.highestBid.call()} ETH transferred to ${beneficiary}.`
+        );
       } catch (error) {
-        console.log("Funds not yet available.");
+        // console.log("Funds not yet available.");
       }
     }
   }

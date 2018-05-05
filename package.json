@@ -4,7 +4,8 @@
   "description": "Backend for datachain BoT",
   "main": "index.js",
   "scripts": {
-    "test": "export PORT=0 && babel-node index.js",
+    "test": "babel-node index.js",
+    "run": "PORT=0 babel-node index.js",
     "testAll":
       "(export PORT=0 && npm run test) & (export PORT=1 && npm run test) & (export PORT=2 && npm run test) & (export PORT=3 && npm run test) & (export PORT=4 && npm run test) && fg",
     "start":
