@@ -36,7 +36,7 @@ const createAuction = async () => {
     );
   console.log("Data Hash:" + sellerHash);
   let collectionPeriod = 600;
-  let biddingTime = 60;
+  let biddingTime = 100;
 
   let metadataJSON = sampleMetadata[parseInt(process.env.PORT)];
   metadataJSON.location = getLocation();
