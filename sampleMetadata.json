@@ -26,8 +26,8 @@
     "links": [
       { "rel": "properties", "href": "/things/pi/properties" },
       { "rel": "events", "href": "/things/pi/events" },
-      { "rel": "alternate", "href": "http://localhost:5000/things/pi" },
-      { "rel": "root", "href": "http://localhost:5000" },
+      { "rel": "alternate", "href": "http://localhost:5001/things/pi" },
+      { "rel": "root", "href": "http://localhost:5001" },
       { "href": "/things/pi", "rel": "alternate", "mediaType": "text/html" }
     ],
     "name": "Nest Thermostat",
@@ -49,8 +49,8 @@
     "links": [
       { "rel": "properties", "href": "/things/pi/properties" },
       { "rel": "events", "href": "/things/pi/events" },
-      { "rel": "alternate", "href": "http://localhost:5000/things/pi" },
-      { "rel": "root", "href": "http://localhost:5000" },
+      { "rel": "alternate", "href": "http://localhost:5002/things/pi" },
+      { "rel": "root", "href": "http://localhost:5002" },
       { "href": "/things/pi", "rel": "alternate", "mediaType": "text/html" }
     ],
     "name": "Samsung RF22N9781SG/AA",
@@ -70,8 +70,8 @@
     "links": [
       { "rel": "properties", "href": "/things/pi/properties" },
       { "rel": "events", "href": "/things/pi/events" },
-      { "rel": "alternate", "href": "http://localhost:5000/things/pi" },
-      { "rel": "root", "href": "http://localhost:5000" },
+      { "rel": "alternate", "href": "http://localhost:5003/things/pi" },
+      { "rel": "root", "href": "http://localhost:5003" },
       { "href": "/things/pi", "rel": "alternate", "mediaType": "text/html" }
     ],
     "name": "Fitbit Versa",
@@ -93,8 +93,8 @@
     "links": [
       { "rel": "properties", "href": "/things/pi/properties" },
       { "rel": "events", "href": "/things/pi/events" },
-      { "rel": "alternate", "href": "http://localhost:5000/things/pi" },
-      { "rel": "root", "href": "http://localhost:5000" },
+      { "rel": "alternate", "href": "http://localhost:5004/things/pi" },
+      { "rel": "root", "href": "http://localhost:5004" },
       { "href": "/things/pi", "rel": "alternate", "mediaType": "text/html" }
     ],
     "name": "SEN-13322",

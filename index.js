@@ -35,8 +35,8 @@ const createAuction = async () => {
         : sampleHumidityData.slice(0, 128)
     );
   console.log("Data Hash:" + sellerHash);
-  let collectionPeriod = 600;
-  let biddingTime = 100;
+  let collectionPeriod = 100;
+  let biddingTime = 120;
 
   let metadataJSON = sampleMetadata[parseInt(process.env.PORT)];
   metadataJSON.location = getLocation();
